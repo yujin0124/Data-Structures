@@ -112,7 +112,24 @@ int main()
 
 void reverse(Queue *q)
 {
-/* add your code here */
+	if(q == NULL || isEmptyQueue(q)) {
+		return;
+	}
+
+	// queue의 요소들을 뒤집을 때 쓰이는 tempStack을 선언하고 초기화
+	Stack tempStack;
+	tempStack.ll.head = NULL;
+	tempStack.ll.size = 0;
+	tempStack.ll.tail = NULL;
+
+	// q의 모든 요소를 dequeue해서 tempStack에 push
+	while(!isEmptyQueue(q)){
+		push(&tempStack, dequeue(q));
+	}
+	// tempStack의 모든 요소를 pop해서 q에 enqueue
+	while(!isEmptyStack(&tempStack)){
+		enqueue(q, pop(&tempStack));
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

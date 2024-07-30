@@ -86,7 +86,44 @@ int main()
 
 void moveEvenItemsToBack(LinkedList *ll)
 {
-	/* add your code here */
+	if(ll == NULL || ll -> head == NULL || ll -> head -> next == NULL) {
+		return;
+	}
+
+	// LinkedList의 마지막 노드 찾기
+	ListNode *end = ll -> head;
+	while(end -> next != NULL){
+		end = end -> next;
+	}
+
+	ListNode *cur = ll -> head;
+	ListNode *prev = NULL;
+	ListNode *originalEnd = end;
+
+	while(1){
+		ListNode *next = cur -> next;
+
+		// item이 짝수일 때
+		if(cur -> item % 2 == 0){
+			if(prev != NULL){
+				prev -> next = next;
+			} else {
+				ll -> head = next;
+			}
+			end -> next = cur;
+			cur -> next = NULL;
+			end = cur;
+		} else {
+			prev = cur;
+		}
+
+		// 원래 LinkedList의 마지막 노드까지 처리 했으면 반복 종료
+		if(cur == originalEnd){
+			break;
+		}
+		
+		cur = next;
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

@@ -103,7 +103,23 @@ int main()
 
 int isStackPairwiseConsecutive(Stack *s)
 {
-  /* add your code here */
+	// Stack이 비어있거나 size가 홀수이면 0 리턴
+	if (s == NULL || isEmptyStack(s) || (s -> ll).size % 2 != 0) {
+		return 0;
+	}
+	
+	ListNode *cur = (s -> ll).head;
+	while(cur != NULL){
+		int num1 = cur -> item;
+		int num2 = cur -> next -> item;
+
+		// 두 요소가 연속적이지 않으면 0 리턴
+		if (num1 - num2 != 1 && num2 - num1 != 1) {
+			return 0;
+		}
+		cur = cur -> next -> next;
+	}
+	return 1;
 }
 
 //////////////////////////////////////////////////////////////////////////////////

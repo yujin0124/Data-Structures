@@ -116,12 +116,42 @@ int main()
 
 void createQueueFromLinkedList(LinkedList *ll, Queue *q)
 {
-	/* add your code here */
+	// queue가 비어있지 않으면 비움
+	if(!isEmptyQueue(q)) {
+		removeAllItemsFromQueue(q);
+	}
+	
+	// LinkedList의 각 요소를 Queue에 Enqueue
+	ListNode *temp = ll -> head;
+	while(temp != NULL){
+		enqueue(q, temp -> item);
+		temp = temp -> next;
+	}
 }
 
 void removeOddValues(Queue *q)
 {
-	/* add your code here */
+	if (q == NULL || isEmptyQueue(q)) {
+		return;
+	}
+	
+	// 짝수 값을 보관하는 tempQueue
+	Queue tempQueue;
+	tempQueue.ll.head = NULL;
+	tempQueue.ll.size = 0;
+
+	// q의 모든 노드를 순회하면서 짝수면 tempQueue에 enqueue
+	while(!isEmptyQueue(q)){
+		int item = dequeue(q);
+		if(item % 2 == 0){
+			enqueue(&tempQueue, item);
+		}
+	}
+
+	// tempQueue의 노드를 q로 이동
+	while(!isEmptyQueue(&tempQueue)) {
+		enqueue(q, dequeue(&tempQueue));
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////////////

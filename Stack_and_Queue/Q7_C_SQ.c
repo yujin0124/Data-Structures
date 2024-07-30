@@ -104,7 +104,38 @@ int main()
 ////////////////////////////////////////////////////////////
 int balanced(char *expression)
 {
-/* add your code here */
+	if(expression == NULL || *expression == '\0'){
+		return 1;
+	}
+
+	Stack stack;
+	stack.ll.head = NULL;
+	stack.ll.size = 0;
+
+	while(*expression != '\0') {
+		// '(', '{', '[' 중 하나가 입력되면 stack에 push
+		if(*expression == '[' || *expression == '{' || *expression == '(') {
+			push(&stack, *expression);
+		} else if(*expression == ']' || *expression == '}' || *expression == ')') {
+			// ')', '}', ']' 중 하나가 입력되었다면 stack의 top과 비교
+            if(isEmptyStack(&stack)) {
+                return 1; // stack이 비어있으면 1을 리턴
+            }
+            char tempChar = pop(&stack);
+			// 짝이 맞지 않으면 1을 리턴
+            if((tempChar == '[' && *expression != ']') ||
+               (tempChar == '{' && *expression != '}') ||
+               (tempChar == '(' && *expression != ')')) {
+                return 1;
+            }
+        } else {
+            return 1; // 괄호 외의 다른 입력이 들어왔으면 1을 리턴
+        }
+		// 다음으로 이동
+        expression++;
+    }
+	// 반복이 끝난 후에 스택이 비어있지 않다면 1을 리턴, 비어있으면 0을 리턴
+	return isEmptyStack(&stack) ? 0 : 1;
 }
 
 ////////////////////////////////////////////////////////////
