@@ -103,7 +103,18 @@ int main()
 int sumOfOddNodes(BTNode *node)
 
 {
-    /* add your code here */
+    if(node == NULL){
+        return 0;
+    }
+
+    // 홀수면 기록해놓고 리턴할 때 더함
+    int oddNumber = 0;
+    if(node -> item % 2 != 0) {
+        oddNumber += node -> item;
+    }
+
+    return sumOfOddNodes(node -> left) + sumOfOddNodes(node -> right) + oddNumber;
+
 }
 
 //////////////////////////////////////////////////////////////////////////////////
