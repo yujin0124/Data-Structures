@@ -97,7 +97,15 @@ int main()
 int maxHeight(BTNode *node)
 
 {
-    /* add your code here */
+    if(node == NULL) {
+        return -1;
+    }
+
+    int leftHeight = maxHeight(node -> left);
+    int rightHeight = maxHeight(node -> right);
+
+    // 왼쪽 서브 트리의 height와 오른쪽 서브 트리의 height 중에 큰 쪽에 1을 더해 리턴
+    return (leftHeight > rightHeight ? leftHeight : rightHeight) + 1;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
