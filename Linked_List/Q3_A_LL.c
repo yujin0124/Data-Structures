@@ -104,7 +104,7 @@ void moveOddItemsToBack(LinkedList *ll)
 		ListNode *next = cur -> next;
 
 		// item이 홀수일 때
-		if(cur -> item % 2 == 1){
+		if(cur -> item % 2 != 0){
 			if(prev != NULL){
 				prev -> next = next;
 			} else {
