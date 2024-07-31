@@ -104,8 +104,13 @@ int main()
 ////////////////////////////////////////////////////////////
 int balanced(char *expression)
 {
-	if(expression == NULL || *expression == '\0'){
+	if(expression == NULL){
 		return 1;
+	}
+
+	// 빈 문자열이면 0을 리턴
+	if(*expression == '\0'){
+		return 0;
 	}
 
 	Stack stack;
