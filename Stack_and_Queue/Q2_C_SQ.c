@@ -140,7 +140,7 @@ void removeEvenValues(Stack *s)
 	// s의 모든 노드를 순회하면서 홀수면 tempStack에 push
 	while(!isEmptyStack(s)){
 		int item = pop(s);
-		if(item % 2 == 1){
+		if(item % 2 != 0){
 			push(&tempStack, item);
 		}
 	}
